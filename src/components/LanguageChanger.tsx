@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-import i18nConfig from '@/i18nConfig';
-import { ChangeEvent } from 'react';
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import i18nConfig from "@/i18nConfig";
+import { ChangeEvent } from "react";
 
 export default function LanguageChanger() {
   const { i18n } = useTranslation();
@@ -19,7 +19,7 @@ export default function LanguageChanger() {
     const days = 30;
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    const expires = '; expires=' + date.toUTCString();
+    const expires = "; expires=" + date.toUTCString();
     document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`;
 
     // redirect to the new locale path
@@ -27,21 +27,18 @@ export default function LanguageChanger() {
       currentLocale === i18nConfig.defaultLocale &&
       !i18nConfig.prefixDefault
     ) {
-      router.push('/' + newLocale + currentPathname);
+      router.push("/" + newLocale + currentPathname);
     } else {
       router.push(
         currentPathname.replace(`/${currentLocale}`, `/${newLocale}`)
       );
     }
-
-    router.refresh();
   };
 
   return (
     <select onChange={handleChange} value={currentLocale}>
       <option value="en">English</option>
-      <option value="de">Deutsch</option>
-      <option value="ja">日本語</option>
+      <option value="fr">Français</option>
     </select>
   );
 }

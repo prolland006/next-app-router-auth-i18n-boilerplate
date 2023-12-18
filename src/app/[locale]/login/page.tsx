@@ -1,14 +1,13 @@
-import Home from "@/components/Home";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import LanguageChanger from "@/components/LanguageChanger";
-import Link from "next/link";
-import initTranslations from "../i18n";
 import TranslationsProvider from "@/components/TranslationsProvider";
-import Menu from "@/components/Menu";
+import initTranslations from "@/app/i18n";
+import Login from "@/components/Login";
+import SessionProvider from "@/components/SessionProvider";
 
-const i18nNamespaces = ["home"];
+const i18nNamespaces = ["login"];
 
-async function HomePage({
+async function LoginPage({
   params: { locale },
 }: {
   params: { locale: string };
@@ -18,12 +17,13 @@ async function HomePage({
   return (
     <TranslationsProvider namespaces={i18nNamespaces} locale={locale}>
       <main className={styles.main}>
-        <Menu />
-        <h1>{t("header")}</h1>
-        <Home />
+        <SessionProvider>
+          <Login />
+        </SessionProvider>
+        <LanguageChanger />
       </main>
     </TranslationsProvider>
   );
 }
 
-export default HomePage;
+export default LoginPage;
